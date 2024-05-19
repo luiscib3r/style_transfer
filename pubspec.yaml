@@ -23,3 +23,24 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+flutter_gen:
+  output: lib/app/assets
+  line_length: 80
+
+  # Optional
+  integrations:
+    flutter_svg: true
+    flare_flutter: true
+    rive: true
+    lottie: true
+
+flutter_launcher_icons:
+  image_path: "logo.jpeg"
+  android: "ic_launcher"
+  ios: true
+  remove_alpha_ios: true
+  min_sdk_android: 21
+  web:
+    generate: true
+    image_path: "logo.jpeg"
