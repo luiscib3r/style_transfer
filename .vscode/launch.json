@@ -1,0 +1,13 @@
+{
+  "configurations": [
+    {
+      "name": "Style Transfer",
+      "type": "dart",
+      "request": "launch",
+      "program": "lib/main.dart",
+      "args": [
+        "--web-port=3000"
+      ]
+    },
+  ]
+}

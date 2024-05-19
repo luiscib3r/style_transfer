@@ -1,0 +1,21 @@
+part of 'styler_bloc.dart';
+
+sealed class StylerState extends Equatable {
+  const StylerState();
+
+  @override
+  List<Object?> get props => [];
+}
+
+class StylerInitial extends StylerState {
+  const StylerInitial();
+}
+
+class StylerProcessingInputImage extends StylerState {
+  const StylerProcessingInputImage({required this.image});
+
+  final Uint8List image;
+
+  @override
+  List<Object?> get props => [image];
+}
