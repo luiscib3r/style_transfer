@@ -1,4 +1,5 @@
 import 'package:style_transfer/app/app.dart';
+import 'package:style_transfer/camera/camera.dart';
 import 'package:style_transfer/editor/editor.dart';
 import 'package:style_transfer/home/home.dart';
 
@@ -13,6 +14,7 @@ class HomePage extends GoRoute {
           ),
           routes: [
             EditorPage(),
+            CameraPage(),
           ],
         );
 

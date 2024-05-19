@@ -20,7 +20,11 @@ class ImageDataSource {
 
     img = copyExpandCanvas(img, newHeight: max, newWidth: max);
 
-    img = copyResizeCropSquare(img, size: size);
+    img = copyResizeCropSquare(
+      img,
+      size: size,
+      interpolation: Interpolation.cubic,
+    );
 
     final output = encodeJpg(img);
 

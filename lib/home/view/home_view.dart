@@ -1,8 +1,7 @@
-import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:style_transfer/app/app.dart';
+import 'package:style_transfer/camera/camera.dart';
 import 'package:style_transfer/editor/editor.dart';
 
 class HomeView extends StatelessWidget {
@@ -52,7 +51,7 @@ class HomeView extends StatelessWidget {
                   bloc.selectImage(image);
                 }
               case 1:
-                log('Selected Camera');
+                CameraPage.open(context);
               case _:
                 break;
             }

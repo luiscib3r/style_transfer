@@ -24,7 +24,7 @@ class EditorView extends StatelessWidget {
                   listenWhen: (prev, curr) => curr is StylerProcessError,
                   listener: (context, state) {
                     final failure = (state as StylerProcessError).failure;
-                    context.showError(failure);
+                    context.showFailure(failure);
                   },
                   builder: (context, state) => switch (state) {
                     StylerProcessingImage(image: final image) => EditorImage(

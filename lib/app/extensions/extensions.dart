@@ -9,10 +9,19 @@ extension BuildContextX on BuildContext {
   double get width => size.width;
   double get height => size.height;
 
-  void showError(Failure failure) {
+  void showFailure(Failure failure) {
     ScaffoldMessenger.of(this).showSnackBar(
       SnackBar(
         content: Text(_getFailureMessage(failure)),
+        backgroundColor: colors.error,
+      ),
+    );
+  }
+
+  void showError(String message) {
+    ScaffoldMessenger.of(this).showSnackBar(
+      SnackBar(
+        content: Text(message),
         backgroundColor: colors.error,
       ),
     );
