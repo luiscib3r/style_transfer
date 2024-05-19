@@ -15,3 +15,11 @@ class StylerImageSelected extends StylerEvent {
   @override
   List<Object> get props => [image];
 }
+
+class StylerRotateImageLeft extends StylerEvent {
+  const StylerRotateImageLeft();
+}
+
+class StylerRotateImageRight extends StylerEvent {
+  const StylerRotateImageRight();
+}

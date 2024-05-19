@@ -11,8 +11,8 @@ class StylerInitial extends StylerState {
   const StylerInitial();
 }
 
-class StylerProcessingInputImage extends StylerState {
-  const StylerProcessingInputImage({required this.image});
+class StylerProcessingImage extends StylerState {
+  const StylerProcessingImage({required this.image});
 
   final Uint8List image;
 

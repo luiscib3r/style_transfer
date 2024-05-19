@@ -2,5 +2,8 @@
   "@@locale": "en",
   "appName": "Style Transfer",
   "gallery": "Gallery",
-  "camera": "Camera"
+  "camera": "Camera",
+  "imageResizeFailure": "Failed to resize image",
+  "imageDecodeFailure": "Failed to decode image",
+  "selectImage": "Select Image"
 }

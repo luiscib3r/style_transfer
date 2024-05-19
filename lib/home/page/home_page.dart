@@ -1,4 +1,5 @@
 import 'package:style_transfer/app/app.dart';
+import 'package:style_transfer/editor/editor.dart';
 import 'package:style_transfer/home/home.dart';
 
 class HomePage extends GoRoute {
@@ -10,6 +11,9 @@ class HomePage extends GoRoute {
             name: _name,
             child: HomeView(),
           ),
+          routes: [
+            EditorPage(),
+          ],
         );
 
   static const _path = '/';

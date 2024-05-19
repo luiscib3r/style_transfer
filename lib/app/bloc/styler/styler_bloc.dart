@@ -21,6 +21,9 @@ abstract class StylerBloc extends Cubit<StylerState> {
 
   void selectImage(Uint8List image) => add(StylerImageSelected(image: image));
 
+  void rotateLeft() => add(const StylerRotateImageLeft());
+  void rotateRight() => add(const StylerRotateImageRight());
+
   void add(StylerEvent event);
 
   @override

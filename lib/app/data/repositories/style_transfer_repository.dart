@@ -19,15 +19,17 @@ class StyleTransferRepository extends BaseRepository {
 
   Future<Result<Uint8List>> rotateLeft({
     required Uint8List image,
-  }) {
-    throw UnimplementedError();
-  }
+  }) =>
+      process(
+        action: () => _imageDataSource.rotateLeft(image: image),
+      );
 
   Future<Result<Uint8List>> rotateRight({
     required Uint8List image,
-  }) {
-    throw UnimplementedError();
-  }
+  }) =>
+      process(
+        action: () => _imageDataSource.rotateRight(image: image),
+      );
 
   Future<Result<Uint8List>> run({
     required Uint8List image,

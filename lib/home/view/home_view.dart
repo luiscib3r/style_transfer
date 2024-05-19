@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:style_transfer/app/app.dart';
+import 'package:style_transfer/editor/editor.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -15,8 +16,8 @@ class HomeView extends StatelessWidget {
     final bloc = context.read<StylerBloc>();
 
     return BlocListener<StylerBloc, StylerState>(
-      listenWhen: (previous, current) => current is StylerProcessingInputImage,
-      listener: (context, state) {},
+      listenWhen: (previous, current) => current is StylerProcessingImage,
+      listener: (context, state) => EditorPage.open(context),
       child: Scaffold(
         body: SafeArea(
           child: Padding(

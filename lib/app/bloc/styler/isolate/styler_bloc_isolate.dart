@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:isolate';
 
+import 'package:flutter/services.dart';
 import 'package:style_transfer/app/app.dart';
 
 part 'styler_service_isolate.dart';
@@ -16,7 +17,13 @@ class StylerBlocImpl extends StylerBloc {
     final receivePortBloc = ReceivePort();
 
     final isolate = await Isolate.spawn(
-      (sendPort) {
+      (input) {
+        final (sendPort, rootToken) = input;
+
+        if (rootToken != null) {
+          BackgroundIsolateBinaryMessenger.ensureInitialized(rootToken);
+        }
+
         final receivePortService = ReceivePort();
 
         sendPort.send(receivePortService.sendPort);
@@ -31,7 +38,7 @@ class StylerBlocImpl extends StylerBloc {
             .cast<StylerEvent>()
             .listen(bloc.add);
       },
-      receivePortBloc.sendPort,
+      (receivePortBloc.sendPort, RootIsolateToken.instance),
     );
 
     final bloc = StylerBlocImpl()

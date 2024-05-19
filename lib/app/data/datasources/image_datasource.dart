@@ -10,17 +10,52 @@ class ImageDataSource {
     required Uint8List image,
     required int size,
   }) async {
-    final cmd = Command()
-      ..decodeImage(image)
-      ..copyResize(width: size, height: size)
-      ..encodeJpg();
+    var img = decodeImage(image);
 
-    final output = await cmd.executeThread();
-
-    if (output.outputBytes != null) {
-      return output.outputBytes!;
-    } else {
-      throw const ImageResizeException();
+    if (img == null) {
+      throw const ImageDecodeException();
     }
+
+    final max = img.width > img.height ? img.width : img.height;
+
+    img = copyExpandCanvas(img, newHeight: max, newWidth: max);
+
+    img = copyResizeCropSquare(img, size: size);
+
+    final output = encodeJpg(img);
+
+    return output;
+  }
+
+  Future<Uint8List> rotateLeft({
+    required Uint8List image,
+  }) async {
+    var img = decodeImage(image);
+
+    if (img == null) {
+      throw const ImageDecodeException();
+    }
+
+    img = copyRotate(img, angle: -90);
+
+    final output = encodeJpg(img);
+
+    return output;
+  }
+
+  Future<Uint8List> rotateRight({
+    required Uint8List image,
+  }) async {
+    var img = decodeImage(image);
+
+    if (img == null) {
+      throw const ImageDecodeException();
+    }
+
+    img = copyRotate(img, angle: 90);
+
+    final output = encodeJpg(img);
+
+    return output;
   }
 }

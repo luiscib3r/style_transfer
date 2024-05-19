@@ -6,6 +6,8 @@ abstract class StylerService extends Bloc<StylerEvent, StylerState> {
   })  : _repository = repository,
         super(const StylerInitial()) {
     on<StylerImageSelected>(_imageSelected);
+    on<StylerRotateImageLeft>(_rotateImageLeft);
+    on<StylerRotateImageRight>(_rotateImageRight);
   }
 
   final StyleTransferRepository _repository;
@@ -16,7 +18,7 @@ abstract class StylerService extends Bloc<StylerEvent, StylerState> {
     StylerImageSelected event,
     Emitter<StylerState> emit,
   ) async {
-    emit(StylerProcessingInputImage(image: event.image));
+    emit(StylerProcessingImage(image: event.image));
 
     final result = await _repository.resizeImage(
       image: event.image,
@@ -28,6 +30,48 @@ abstract class StylerService extends Bloc<StylerEvent, StylerState> {
         emit(StylerImageProcessed(image: image));
       case ResultFailure(failure: final failure):
         emit(StylerProcessError(image: event.image, failure: failure));
+    }
+  }
+
+  Future<void> _rotateImageLeft(
+    StylerRotateImageLeft event,
+    Emitter<StylerState> emit,
+  ) async {
+    final currentState = state;
+
+    if (currentState is StylerImageProcessed) {
+      emit(StylerProcessingImage(image: currentState.image));
+
+      final result = await _repository.rotateLeft(
+        image: currentState.image,
+      );
+
+      switch (result) {
+        case ResultSuccess(data: final image):
+          emit(StylerImageProcessed(image: image));
+        case ResultFailure(failure: final failure):
+          emit(StylerProcessError(image: currentState.image, failure: failure));
+      }
+    }
+  }
+
+  Future<void> _rotateImageRight(
+    StylerRotateImageRight event,
+    Emitter<StylerState> emit,
+  ) async {
+    final currentState = state;
+
+    if (currentState is StylerImageProcessed) {
+      final result = await _repository.rotateRight(
+        image: currentState.image,
+      );
+
+      switch (result) {
+        case ResultSuccess(data: final image):
+          emit(StylerImageProcessed(image: image));
+        case ResultFailure(failure: final failure):
+          emit(StylerProcessError(image: currentState.image, failure: failure));
+      }
     }
   }
 
