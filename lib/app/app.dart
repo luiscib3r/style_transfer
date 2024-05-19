@@ -6,6 +6,7 @@ export 'package:go_router/go_router.dart';
 export 'assets/assets.gen.dart';
 export 'bloc/bloc.dart';
 export 'data/data.dart';
+export 'dependencies/dependencies.dart';
 export 'extensions/extensions.dart';
 export 'router/router.dart';
 export 'theme/theme.dart';

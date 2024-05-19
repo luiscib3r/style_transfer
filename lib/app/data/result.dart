@@ -1,5 +1,8 @@
 import 'package:equatable/equatable.dart';
 
+part 'exceptions.dart';
+part 'failure.dart';
+
 sealed class Result<T> extends Equatable {
   const Result();
 }
@@ -14,12 +17,10 @@ class ResultSuccess<T> extends Result<T> {
 }
 
 class ResultFailure<T> extends Result<T> {
-  const ResultFailure(this.exception);
+  const ResultFailure(this.failure);
 
-  final Exception exception;
-
-  String get message => exception.toString();
+  final Failure failure;
 
   @override
-  List<Object?> get props => [exception];
+  List<Object?> get props => [failure];
 }
