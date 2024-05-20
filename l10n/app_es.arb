@@ -10,5 +10,6 @@
   "interpreterFailure": "Ha fallado la inicialización del interpreter",
   "loadFilter": "Cargar filtro",
   "save": "Guardar",
-  "share": "Compartir"
+  "share": "Compartir",
+  "remoteServerFailure": "Error al realizar la petición al servidor remoto"
 }

@@ -6,6 +6,7 @@ abstract class StylerDataSource {
   Future<void> load({
     int? predictInterpreterAddress,
     int? transferInterpreterAddress,
+    String? baseUrl,
   });
 
   Future<Uint8List> run({

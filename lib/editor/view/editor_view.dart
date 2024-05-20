@@ -131,10 +131,11 @@ class EditorView extends StatelessWidget {
             icon: const Icon(CupertinoIcons.cloud_download),
             label: l10n.save,
           ),
-          BottomNavigationBarItem(
-            icon: const Icon(CupertinoIcons.share),
-            label: l10n.share,
-          ),
+          if (!kIsWeb)
+            BottomNavigationBarItem(
+              icon: const Icon(CupertinoIcons.share),
+              label: l10n.share,
+            ),
         ],
         iconSize: 32,
         selectedItemColor: context.colors.primary,

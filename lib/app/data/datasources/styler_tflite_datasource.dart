@@ -20,6 +20,7 @@ class StylerDataSourceImpl extends StylerDataSource {
   Future<void> load({
     int? predictInterpreterAddress,
     int? transferInterpreterAddress,
+    String? baseUrl,
   }) async {
     final predictionOptions = InterpreterOptions();
     final transferOptions = InterpreterOptions();

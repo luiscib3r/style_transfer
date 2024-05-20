@@ -5,11 +5,11 @@ import 'package:style_transfer/app/data/repositories/style_transfer_repository.d
 
 void main() {
   StylerServiceImpl(
-    repository: const StyleTransferRepository(
-      imageDataSource: ImageDataSource(),
+    repository: StyleTransferRepository(
+      imageDataSource: const ImageDataSource(),
       stylerDataSource: StylerDataSourceImpl(
-        imageDataSource: ImageDataSource(),
+        imageDataSource: const ImageDataSource(),
       ),
-    ),
+    )..load(baseUrl: const String.fromEnvironment('baseUrl')),
   );
 }

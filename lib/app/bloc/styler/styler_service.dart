@@ -24,6 +24,13 @@ abstract class StylerService extends Bloc<StylerEvent, StylerState> {
 
   void emitState(StylerState state);
 
+  Uint8List? get _image => switch (state) {
+        StylerImageProcessed(image: final image) => image,
+        StylerImageWithFilter(image: final image) => image,
+        StylerProcessError(image: final image) => image,
+        _ => null,
+      };
+
   Future<void> _imageSelected(
     StylerImageSelected event,
     Emitter<StylerState> emit,
@@ -47,11 +54,7 @@ abstract class StylerService extends Bloc<StylerEvent, StylerState> {
     StylerRotateImageLeft event,
     Emitter<StylerState> emit,
   ) async {
-    final image = switch (state) {
-      StylerImageProcessed(image: final image) => image,
-      StylerImageWithFilter(image: final image) => image,
-      _ => null,
-    };
+    final image = _image;
 
     final original = switch (state) {
       StylerImageWithFilter(original: final image) => image,
@@ -82,11 +85,7 @@ abstract class StylerService extends Bloc<StylerEvent, StylerState> {
     StylerRotateImageRight event,
     Emitter<StylerState> emit,
   ) async {
-    final image = switch (state) {
-      StylerImageProcessed(image: final image) => image,
-      StylerImageWithFilter(image: final image) => image,
-      _ => null,
-    };
+    final image = _image;
 
     final original = switch (state) {
       StylerImageWithFilter(original: final image) => image,
@@ -120,6 +119,7 @@ abstract class StylerService extends Bloc<StylerEvent, StylerState> {
     final image = switch (state) {
       StylerImageProcessed(image: final image) => image,
       StylerImageWithFilter(original: final image) => image,
+      StylerProcessError(image: final image) => image,
       _ => null,
     };
 

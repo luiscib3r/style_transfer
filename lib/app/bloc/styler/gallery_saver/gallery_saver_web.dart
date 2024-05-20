@@ -1,23 +1,20 @@
-import 'dart:js_interop';
+// ignore_for_file: avoid_web_libraries_in_flutter
+
+import 'dart:html';
 import 'dart:typed_data';
 
 import 'package:uuid/uuid.dart';
-import 'package:web/web.dart';
 
 Future<void> saveImageToGallery(Uint8List image) async {
   const uuid = Uuid();
-  final array = JSArray<JSAny>()..add(image.toJS);
+  final blob = Blob([image], 'image/jpg');
 
-  final blob = Blob(
-    array,
-    BlobPropertyBag(type: 'image/jpeg'),
-  );
+  final url = Url.createObjectUrlFromBlob(blob);
 
-  final url = URL.createObjectURL(blob);
-
-  HTMLAnchorElement()
-    ..href = url
+  AnchorElement(href: url)
     ..setAttribute('download', '${uuid.v4()}.jpg')
     ..click()
     ..remove();
+
+  Url.revokeObjectUrl(url);
 }

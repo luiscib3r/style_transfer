@@ -4,7 +4,8 @@ enum FailureTypes {
   unknown,
   imageDecode,
   imageResize,
-  interpreter;
+  interpreter,
+  remoteServer;
 
   factory FailureTypes.from(String type) {
     switch (type) {
@@ -16,6 +17,8 @@ enum FailureTypes {
         return FailureTypes.imageResize;
       case 'interpreter':
         return FailureTypes.interpreter;
+      case 'remoteServer':
+        return FailureTypes.remoteServer;
       default:
         throw Exception('Unknown failure type: $type');
     }
@@ -31,6 +34,8 @@ enum FailureTypes {
         return 'imageResize';
       case FailureTypes.interpreter:
         return 'interpreter';
+      case FailureTypes.remoteServer:
+        return 'remoteServer';
     }
   }
 }
@@ -48,6 +53,7 @@ sealed class Failure extends Equatable {
       FailureTypes.imageDecode => const ImageDecodeFailure(),
       FailureTypes.imageResize => const ImageResizeFailure(),
       FailureTypes.interpreter => const InterpreterFailure(),
+      FailureTypes.remoteServer => const RemoteServerFailure(),
     };
   }
 
@@ -56,6 +62,7 @@ sealed class Failure extends Equatable {
         final ImageDecodeFailure failure => failure.encode,
         final ImageResizeFailure failure => failure.encode,
         final InterpreterFailure failure => failure.encode,
+        final RemoteServerFailure failure => failure.encode,
       };
 
   @override
@@ -110,4 +117,11 @@ class InterpreterFailure extends Failure {
   String get encode => json.encode({
         'type': FailureTypes.interpreter.name,
       });
+}
+
+class RemoteServerFailure extends Failure {
+  const RemoteServerFailure();
+
+  @override
+  List<Object?> get props => [];
 }

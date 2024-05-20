@@ -10,5 +10,6 @@
   "interpreterFailure": "Interpreter initialization has failed",
   "loadFilter": "Load Filter",
   "save": "Save",
-  "share": "Share"
+  "share": "Share",
+  "remoteServerFailure": "Failed run inference on remote server"
 }

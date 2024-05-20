@@ -42,6 +42,7 @@ extension BuildContextX on BuildContext {
       ImageResizeFailure() => l10n.imageResizeFailure,
       ImageDecodeFailure() => l10n.imageDecodeFailure,
       InterpreterFailure() => l10n.interpreterFailure,
+      RemoteServerFailure() => l10n.remoteServerFailure,
     };
   }
 }

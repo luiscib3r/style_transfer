@@ -11,3 +11,7 @@ class ImageResizeException implements Exception {
 class InterpreterUnitializedException implements Exception {
   const InterpreterUnitializedException();
 }
+
+class RemoteServerException implements Exception {
+  const RemoteServerException();
+}

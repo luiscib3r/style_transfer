@@ -15,10 +15,12 @@ class StyleTransferRepository extends BaseRepository {
   Future<void> load({
     int? predictInterpreterAddress,
     int? transferInterpreterAddress,
+    String? baseUrl,
   }) =>
       _stylerDataSource.load(
         predictInterpreterAddress: predictInterpreterAddress,
         transferInterpreterAddress: transferInterpreterAddress,
+        baseUrl: baseUrl,
       );
 
   Future<Result<Uint8List>> resizeImage({
