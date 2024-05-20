@@ -7,5 +7,8 @@
   "imageDecodeFailure": "Error al decodificar la imagen",
   "selectImage": "Seleccionar imagen",
   "imageSaved": "Imagen guardada en la galería",
-  "interpreterFailure": "Ha fallado la inicialización del interpreter"
+  "interpreterFailure": "Ha fallado la inicialización del interpreter",
+  "loadFilter": "Cargar filtro",
+  "save": "Guardar",
+  "share": "Compartir"
 }

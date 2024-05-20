@@ -36,7 +36,8 @@ class EditorView extends StatelessWidget {
                         isLoading: true,
                       ),
                     StylerImageProcessed(image: final image) ||
-                    StylerProcessError(image: final image) =>
+                    StylerProcessError(image: final image) ||
+                    StylerImageWithFilter(image: final image) =>
                       EditorImage(
                         image: image,
                       ),
@@ -85,7 +86,18 @@ class EditorView extends StatelessWidget {
                       ),
                       const SizedBox(width: 12),
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          final image = switch (bloc.state) {
+                            StylerImageProcessed(image: final image) => image,
+                            StylerImageWithFilter(original: final image) =>
+                              image,
+                            _ => null,
+                          };
+
+                          if (image != null) {
+                            bloc.selectedFilter(image);
+                          }
+                        },
                         icon: const Icon(
                           CupertinoIcons.sparkles,
                           size: 48,
@@ -110,14 +122,18 @@ class EditorView extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.color_filter),
-            label: 'Load Filter',
+            icon: const Icon(CupertinoIcons.color_filter),
+            label: l10n.loadFilter,
           ),
           BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.cloud_download),
-            label: 'Save',
+            icon: const Icon(CupertinoIcons.cloud_download),
+            label: l10n.save,
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(CupertinoIcons.share),
+            label: l10n.share,
           ),
         ],
         iconSize: 32,
@@ -139,6 +155,10 @@ class EditorView extends StatelessWidget {
             if (!kIsWeb && context.mounted) {
               context.showInfo(l10n.imageSaved);
             }
+          }
+
+          if (index == 2) {
+            await bloc.shareImage();
           }
         },
       ),

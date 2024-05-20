@@ -45,6 +45,8 @@ class _FiltersListViewState extends State<FiltersListView> {
 
   @override
   Widget build(BuildContext context) {
+    final bloc = context.read<StylerBloc>();
+
     return BlocListener<FilterBloc, FilterState>(
       listener: (context, state) {
         selectedIndex = null;
@@ -77,13 +79,9 @@ class _FiltersListViewState extends State<FiltersListView> {
                   margin: const EdgeInsets.all(6),
                   child: InkWell(
                     onTap: () {
-                      final bloc = context.read<StylerBloc>();
-
-                      if (bloc.state is StylerImageProcessed) {
-                        bloc.selectedFilter(widget.filters[index]);
-                        selectedIndex = index;
-                        setState(() {});
-                      }
+                      bloc.selectedFilter(widget.filters[index]);
+                      selectedIndex = index;
+                      setState(() {});
                     },
                     borderRadius: BorderRadius.circular(12),
                     child: Padding(

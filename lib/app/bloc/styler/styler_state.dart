@@ -43,3 +43,16 @@ class StylerImageProcessed extends StylerState {
   @override
   List<Object?> get props => [image];
 }
+
+class StylerImageWithFilter extends StylerState {
+  const StylerImageWithFilter({
+    required this.image,
+    required this.original,
+  });
+
+  final Uint8List image;
+  final Uint8List original;
+
+  @override
+  List<Object?> get props => [image, original];
+}

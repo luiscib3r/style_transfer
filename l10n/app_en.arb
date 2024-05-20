@@ -7,5 +7,8 @@
   "imageDecodeFailure": "Failed to decode image",
   "selectImage": "Select Image",
   "imageSaved": "Image saved in gallery",
-  "interpreterFailure": "Interpreter initialization has failed"
+  "interpreterFailure": "Interpreter initialization has failed",
+  "loadFilter": "Load Filter",
+  "save": "Save",
+  "share": "Share"
 }

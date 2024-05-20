@@ -47,20 +47,33 @@ abstract class StylerService extends Bloc<StylerEvent, StylerState> {
     StylerRotateImageLeft event,
     Emitter<StylerState> emit,
   ) async {
-    final currentState = state;
+    final image = switch (state) {
+      StylerImageProcessed(image: final image) => image,
+      StylerImageWithFilter(image: final image) => image,
+      _ => null,
+    };
 
-    if (currentState is StylerImageProcessed) {
-      emit(StylerProcessingImage(image: currentState.image));
+    final original = switch (state) {
+      StylerImageWithFilter(original: final image) => image,
+      _ => null,
+    };
+
+    if (image != null) {
+      emit(StylerProcessingImage(image: image));
 
       final result = await _repository.rotateLeft(
-        image: currentState.image,
+        image: image,
       );
 
       switch (result) {
         case ResultSuccess(data: final image):
-          emit(StylerImageProcessed(image: image));
+          emit(
+            original != null
+                ? StylerImageWithFilter(image: image, original: original)
+                : StylerImageProcessed(image: image),
+          );
         case ResultFailure(failure: final failure):
-          emit(StylerProcessError(image: currentState.image, failure: failure));
+          emit(StylerProcessError(image: image, failure: failure));
       }
     }
   }
@@ -69,19 +82,33 @@ abstract class StylerService extends Bloc<StylerEvent, StylerState> {
     StylerRotateImageRight event,
     Emitter<StylerState> emit,
   ) async {
-    final currentState = state;
+    final image = switch (state) {
+      StylerImageProcessed(image: final image) => image,
+      StylerImageWithFilter(image: final image) => image,
+      _ => null,
+    };
 
-    if (currentState is StylerImageProcessed) {
-      emit(StylerProcessingImage(image: currentState.image));
+    final original = switch (state) {
+      StylerImageWithFilter(original: final image) => image,
+      _ => null,
+    };
+
+    if (image != null) {
+      emit(StylerProcessingImage(image: image));
+
       final result = await _repository.rotateRight(
-        image: currentState.image,
+        image: image,
       );
 
       switch (result) {
         case ResultSuccess(data: final image):
-          emit(StylerImageProcessed(image: image));
+          emit(
+            original != null
+                ? StylerImageWithFilter(image: image, original: original)
+                : StylerImageProcessed(image: image),
+          );
         case ResultFailure(failure: final failure):
-          emit(StylerProcessError(image: currentState.image, failure: failure));
+          emit(StylerProcessError(image: image, failure: failure));
       }
     }
   }
@@ -90,21 +117,25 @@ abstract class StylerService extends Bloc<StylerEvent, StylerState> {
     StylerFilterSelected event,
     Emitter<StylerState> emit,
   ) async {
-    final currentState = state;
+    final image = switch (state) {
+      StylerImageProcessed(image: final image) => image,
+      StylerImageWithFilter(original: final image) => image,
+      _ => null,
+    };
 
-    if (currentState is StylerImageProcessed) {
-      emit(StylerProcessingImage(image: currentState.image));
+    if (image != null) {
+      emit(StylerProcessingImage(image: image));
 
       final result = await _repository.run(
-        image: currentState.image,
+        image: image,
         style: event.filter,
       );
 
       switch (result) {
-        case ResultSuccess(data: final image):
-          emit(StylerImageProcessed(image: image));
+        case ResultSuccess(data: final imageFiltered):
+          emit(StylerImageWithFilter(image: imageFiltered, original: image));
         case ResultFailure(failure: final failure):
-          emit(StylerProcessError(image: currentState.image, failure: failure));
+          emit(StylerProcessError(image: image, failure: failure));
       }
     }
   }
