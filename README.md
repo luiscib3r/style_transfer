@@ -12,6 +12,22 @@ Style Transfer is an application developed with Flutter that allows users to app
 
 * **Web Workers on Web**: Similar to isolates in the mobile versions, web workers are used in the web version to perform inference and image processing in the background, ensuring the UI remains smooth and responsive.
 
+## Screenshots
+
+### Web
+|  |  |
+| --- | --- |
+| ![Home](screenshots/web/1.png) | ![Image](screenshots/web/2.png) | 
+![Styled](screenshots/web/3.png) | ![Styled](screenshots/web/4.png) |
+
+### Mobile
+
+|  |  |
+| --- | --- |
+| ![Home](screenshots/mobile/1.png) | ![Image](screenshots/mobile/2.png) |
+| ![Styled](screenshots/mobile/3.png) | ![Styled](screenshots/mobile/4.png) |
+
+
 ## Local deployment using Docker Compose
 
 ```bash
