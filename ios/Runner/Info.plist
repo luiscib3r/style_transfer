@@ -51,5 +51,7 @@
 	<string>$(PRODUCT_NAME) would like to use your camera</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>$(PRODUCT_NAME) would like to use your microphone</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>$(PRODUCT_NAME) would like to save photos to your photo gallery</string>
 </dict>
 </plist>

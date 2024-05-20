@@ -27,6 +27,15 @@ extension BuildContextX on BuildContext {
     );
   }
 
+  void showInfo(String message) {
+    ScaffoldMessenger.of(this).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        backgroundColor: colors.primary,
+      ),
+    );
+  }
+
   String _getFailureMessage(Failure failure) {
     return switch (failure) {
       UnknownFailure(exception: final ex) => ex.toString(),

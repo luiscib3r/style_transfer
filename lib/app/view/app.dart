@@ -14,73 +14,77 @@ class App extends StatelessWidget {
         imageDataSource,
         styleTransferRepository,
       ],
-      child: Builder(
-        builder: (context) {
-          return FutureBuilder(
-            future: Future.wait([
-              StylerBlocImpl.start(repository: context.read()),
-              FilterBlocImpl.start(repository: context.read()),
-            ]),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                final data = snapshot.data! as List<Object>;
+      child: const _App(),
+    );
+  }
+}
 
-                return MultiRepositoryProvider(
-                  providers: [
-                    RepositoryProvider<StylerBloc>.value(
-                      value: data[0] as StylerBloc,
-                    ),
-                    RepositoryProvider<FilterBloc>.value(
-                      value: data[1] as FilterBloc,
-                    ),
-                  ],
-                  child: MaterialApp.router(
-                    theme: appTheme,
-                    routerConfig: appRouter,
-                    supportedLocales: AppLocalizations.supportedLocales,
-                    localizationsDelegates:
-                        AppLocalizations.localizationsDelegates,
-                    debugShowCheckedModeBanner: false,
-                  ),
-                );
-              }
+class _App extends StatefulWidget {
+  const _App();
 
-              return MaterialApp(
-                theme: appTheme,
-                supportedLocales: AppLocalizations.supportedLocales,
-                localizationsDelegates: AppLocalizations.localizationsDelegates,
-                debugShowCheckedModeBanner: false,
-                home: Scaffold(
-                  body: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      if (snapshot.connectionState == ConnectionState.waiting)
-                        const Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            CircularProgressIndicator(),
-                          ],
-                        ),
-                      if (snapshot.hasError)
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Expanded(
-                              child: Text(
-                                snapshot.error.toString(),
-                                textAlign: TextAlign.center,
-                                overflow: TextOverflow.clip,
-                              ),
-                            ),
-                          ],
-                        ),
-                    ],
-                  ),
-                ),
-              );
-            },
-          );
-        },
+  @override
+  State<_App> createState() => _AppState();
+}
+
+class _AppState extends State<_App> {
+  List<Object>? blocs;
+
+  @override
+  void initState() {
+    super.initState();
+
+    loadData();
+  }
+
+  Future<void> loadData() async {
+    blocs = await Future.wait([
+      StylerBlocImpl.start(repository: context.read()),
+      FilterBlocImpl.start(repository: context.read()),
+    ]);
+
+    setState(() {});
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (blocs == null) {
+      return const _AppLoading();
+    }
+
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider<StylerBloc>.value(
+          value: blocs![0] as StylerBloc,
+        ),
+        RepositoryProvider<FilterBloc>.value(
+          value: blocs![1] as FilterBloc,
+        ),
+      ],
+      child: MaterialApp.router(
+        theme: appTheme,
+        routerConfig: appRouter,
+        supportedLocales: AppLocalizations.supportedLocales,
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        debugShowCheckedModeBanner: false,
+      ),
+    );
+  }
+}
+
+class _AppLoading extends StatelessWidget {
+  const _AppLoading();
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: appTheme,
+      supportedLocales: AppLocalizations.supportedLocales,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      debugShowCheckedModeBanner: false,
+      home: const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
       ),
     );
   }

@@ -1,4 +1,6 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:style_transfer/app/app.dart';
 import 'package:style_transfer/editor/editor.dart';
 import 'package:style_transfer/home/home.dart';
@@ -10,6 +12,8 @@ class EditorView extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final bloc = context.read<StylerBloc>();
+    final filterBloc = context.read<FilterBloc>();
+    final picker = ImagePicker();
 
     return Scaffold(
       body: SafeArea(
@@ -104,6 +108,39 @@ class EditorView extends StatelessWidget {
             ),
           ],
         ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(CupertinoIcons.color_filter),
+            label: 'Load Filter',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(CupertinoIcons.cloud_download),
+            label: 'Save',
+          ),
+        ],
+        iconSize: 32,
+        selectedItemColor: context.colors.primary,
+        unselectedItemColor: context.colors.primary,
+        unselectedFontSize: 14,
+        onTap: (index) async {
+          if (index == 0) {
+            final file = await picker.pickImage(source: ImageSource.gallery);
+
+            if (file != null) {
+              final image = await file.readAsBytes();
+              filterBloc.addFilter(image);
+            }
+          }
+
+          if (index == 1) {
+            await bloc.saveImage();
+            if (!kIsWeb && context.mounted) {
+              context.showInfo(l10n.imageSaved);
+            }
+          }
+        },
       ),
     );
   }

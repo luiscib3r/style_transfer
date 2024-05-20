@@ -9,10 +9,8 @@ class FilterControlls extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<FilterBloc, FilterState>(
       builder: (context, state) => switch (state) {
-        FilterDone(filters: final filters) =>
-          FiltersListView(filters: filters),
-        FilterLoading(filters: final filters) =>
-          FiltersListView(
+        FilterDone(filters: final filters) => FiltersListView(filters: filters),
+        FilterLoading(filters: final filters) => FiltersListView(
             filters: filters,
             loading: true,
           ),
@@ -60,7 +58,7 @@ class _FiltersListViewState extends State<FiltersListView> {
           trackVisibility: true,
           thickness: 5,
           controller: scrollController,
-          thumbColor: Theme.of(context).primaryColor,
+          thumbColor: context.colors.primary,
           radius: const Radius.circular(20),
           child: Padding(
             padding: const EdgeInsets.all(6),
