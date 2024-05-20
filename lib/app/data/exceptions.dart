@@ -7,3 +7,7 @@ class ImageDecodeException implements Exception {
 class ImageResizeException implements Exception {
   const ImageResizeException();
 }
+
+class InterpreterUnitializedException implements Exception {
+  const InterpreterUnitializedException();
+}

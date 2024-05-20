@@ -23,3 +23,7 @@ class ImageDecodeFailure extends Failure {
 class ImageResizeFailure extends Failure {
   const ImageResizeFailure();
 }
+
+class InterpreterFailure extends Failure {
+  const InterpreterFailure();
+}

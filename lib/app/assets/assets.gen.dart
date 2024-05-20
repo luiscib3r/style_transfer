@@ -19,6 +19,28 @@ class $AssetsImagesGen {
   List<AssetGenImage> get values => [banner];
 }
 
+class $AssetsModelsGen {
+  const $AssetsModelsGen();
+
+  /// File path: assets/models/.gitkeep
+  String get gitkeep => 'assets/models/.gitkeep';
+
+  /// File path: assets/models/magenta_arbitrary-image-stylization-v1-256_int8_prediction_1.tflite
+  String get magentaArbitraryImageStylizationV1256Int8Prediction1 =>
+      'assets/models/magenta_arbitrary-image-stylization-v1-256_int8_prediction_1.tflite';
+
+  /// File path: assets/models/magenta_arbitrary-image-stylization-v1-256_int8_transfer_1.tflite
+  String get magentaArbitraryImageStylizationV1256Int8Transfer1 =>
+      'assets/models/magenta_arbitrary-image-stylization-v1-256_int8_transfer_1.tflite';
+
+  /// List of all assets
+  List<String> get values => [
+        gitkeep,
+        magentaArbitraryImageStylizationV1256Int8Prediction1,
+        magentaArbitraryImageStylizationV1256Int8Transfer1
+      ];
+}
+
 class $AssetsStylesGen {
   const $AssetsStylesGen();
 
@@ -115,6 +137,7 @@ class Assets {
   Assets._();
 
   static const $AssetsImagesGen images = $AssetsImagesGen();
+  static const $AssetsModelsGen models = $AssetsModelsGen();
   static const $AssetsStylesGen styles = $AssetsStylesGen();
 }
 

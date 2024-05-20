@@ -6,5 +6,6 @@
   "imageResizeFailure": "Failed to resize image",
   "imageDecodeFailure": "Failed to decode image",
   "selectImage": "Select Image",
-  "imageSaved": "Image saved in gallery"
+  "imageSaved": "Image saved in gallery",
+  "interpreterFailure": "Interpreter initialization has failed"
 }

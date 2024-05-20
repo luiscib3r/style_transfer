@@ -23,3 +23,12 @@ class StylerRotateImageLeft extends StylerEvent {
 class StylerRotateImageRight extends StylerEvent {
   const StylerRotateImageRight();
 }
+
+class StylerFilterSelected extends StylerEvent {
+  const StylerFilterSelected({required this.filter});
+
+  final Uint8List filter;
+
+  @override
+  List<Object> get props => [filter];
+}

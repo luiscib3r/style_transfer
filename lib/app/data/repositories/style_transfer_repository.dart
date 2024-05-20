@@ -5,9 +5,21 @@ import 'package:style_transfer/app/app.dart';
 class StyleTransferRepository extends BaseRepository {
   const StyleTransferRepository({
     required ImageDataSource imageDataSource,
-  }) : _imageDataSource = imageDataSource;
+    required StylerDataSource stylerDataSource,
+  })  : _imageDataSource = imageDataSource,
+        _stylerDataSource = stylerDataSource;
 
   final ImageDataSource _imageDataSource;
+  final StylerDataSource _stylerDataSource;
+
+  Future<void> load({
+    int? predictInterpreterAddress,
+    int? transferInterpreterAddress,
+  }) =>
+      _stylerDataSource.load(
+        predictInterpreterAddress: predictInterpreterAddress,
+        transferInterpreterAddress: transferInterpreterAddress,
+      );
 
   Future<Result<Uint8List>> resizeImage({
     required Uint8List image,
@@ -34,7 +46,11 @@ class StyleTransferRepository extends BaseRepository {
   Future<Result<Uint8List>> run({
     required Uint8List image,
     required Uint8List style,
-  }) {
-    throw UnimplementedError();
-  }
+  }) =>
+      process(
+        action: () => _stylerDataSource.run(
+          image: image,
+          style: style,
+        ),
+      );
 }

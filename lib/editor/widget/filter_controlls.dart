@@ -71,25 +71,19 @@ class _FiltersListViewState extends State<FiltersListView> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
                     color: selectedIndex == index
-                        ? Theme.of(context).primaryColor.withOpacity(0.5)
+                        ? context.colors.primary.withOpacity(0.5)
                         : Colors.transparent,
                   ),
                   margin: const EdgeInsets.all(6),
                   child: InkWell(
                     onTap: () {
-                      // final bloc = context.read<StylerBloc>();
+                      final bloc = context.read<StylerBloc>();
 
-                      // if (bloc.state is StylerWithImageProcessed ||
-                      //     bloc.state is StylerWithImageFiltered ||
-                      //     bloc.state is StylerProcessError) {
-                      //   context.read<StylerBloc>().add(
-                      //         StylerFilterSelected(
-                      //           filter: widget.filters[index],
-                      //         ),
-                      //       );
-                      //   selectedIndex = index;
-                      //   setState(() {});
-                      // }
+                      if (bloc.state is StylerImageProcessed) {
+                        bloc.selectedFilter(widget.filters[index]);
+                        selectedIndex = index;
+                        setState(() {});
+                      }
                     },
                     borderRadius: BorderRadius.circular(12),
                     child: Padding(

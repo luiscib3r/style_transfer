@@ -12,6 +12,7 @@ class App extends StatelessWidget {
     return MultiRepositoryProvider(
       providers: [
         imageDataSource,
+        stylerDataSource,
         styleTransferRepository,
       ],
       child: const _App(),

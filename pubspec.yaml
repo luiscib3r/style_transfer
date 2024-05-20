@@ -24,6 +24,8 @@ dependencies:
   image: ^4.1.7
   image_gallery_saver: ^2.0.3
   image_picker: ^1.1.1
+  tflite_flutter:
+    git: https://github.com/tensorflow/flutter-tflite.git
   uuid: ^4.4.0
   web: ^0.5.1
 
@@ -41,6 +43,7 @@ flutter:
   assets:
     - assets/images/
     - assets/styles/
+    - assets/models/
 
 flutter_gen:
   output: lib/app/assets

@@ -4,5 +4,6 @@ final styleTransferRepository = RepositoryProvider(
   lazy: false,
   create: (context) => StyleTransferRepository(
     imageDataSource: context.read(),
+    stylerDataSource: context.read(),
   ),
 );

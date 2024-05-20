@@ -3,6 +3,7 @@ import 'dart:isolate';
 
 import 'package:flutter/services.dart';
 import 'package:style_transfer/app/app.dart';
+import 'package:tflite_flutter/tflite_flutter.dart';
 
 part 'styler_service_isolate.dart';
 
@@ -15,9 +16,15 @@ class StylerBlocImpl extends StylerBloc {
     required StyleTransferRepository repository,
   }) async {
     final receivePortBloc = ReceivePort();
+    final predict = await Interpreter.fromAsset(
+      Assets.models.magentaArbitraryImageStylizationV1256Int8Prediction1,
+    );
+    final transfer = await Interpreter.fromAsset(
+      Assets.models.magentaArbitraryImageStylizationV1256Int8Transfer1,
+    );
 
     final isolate = await Isolate.spawn(
-      (input) {
+      (input) async {
         final (sendPort, rootToken) = input;
 
         if (rootToken != null) {
@@ -31,6 +38,11 @@ class StylerBlocImpl extends StylerBloc {
         final bloc = StylerServiceImpl(
           sendPort: sendPort,
           repository: repository,
+        );
+
+        await bloc.load(
+          predictInterpreterAddress: predict.address,
+          transferInterpreterAddress: transfer.address,
         );
 
         receivePortService

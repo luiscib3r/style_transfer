@@ -41,6 +41,7 @@ extension BuildContextX on BuildContext {
       UnknownFailure(exception: final ex) => ex.toString(),
       ImageResizeFailure() => l10n.imageResizeFailure,
       ImageDecodeFailure() => l10n.imageDecodeFailure,
+      InterpreterFailure() => l10n.interpreterFailure,
     };
   }
 }

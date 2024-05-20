@@ -16,6 +16,8 @@ abstract class BaseRepository {
       return const ResultFailure(ImageResizeFailure());
     } on ImageDecodeException {
       return const ResultFailure(ImageDecodeFailure());
+    } on InterpreterUnitializedException {
+      return const ResultFailure(InterpreterFailure());
     } on Exception catch (e) {
       log(e.toString(), name: runtimeType.toString());
       return ResultFailure(UnknownFailure(e));

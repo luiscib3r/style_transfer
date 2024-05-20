@@ -6,5 +6,6 @@
   "imageResizeFailure": "Error al redimensionar la imagen",
   "imageDecodeFailure": "Error al decodificar la imagen",
   "selectImage": "Seleccionar imagen",
-  "imageSaved": "Imagen guardada en la galería"
+  "imageSaved": "Imagen guardada en la galería",
+  "interpreterFailure": "Ha fallado la inicialización del interpreter"
 }
