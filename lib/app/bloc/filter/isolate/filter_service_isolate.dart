@@ -1,7 +1,7 @@
-part of 'styler_bloc_isolate.dart';
+part of 'filter_bloc_isolate.dart';
 
-class StylerServiceImpl extends StylerService {
-  StylerServiceImpl({
+class FilterServiceImpl extends FilterService {
+  FilterServiceImpl({
     required SendPort sendPort,
     required super.repository,
   }) : _sendPort = sendPort;
@@ -9,7 +9,7 @@ class StylerServiceImpl extends StylerService {
   final SendPort _sendPort;
 
   @override
-  void emitState(StylerState state) {
+  void emitState(FilterState state) {
     _sendPort.send(state);
   }
 }

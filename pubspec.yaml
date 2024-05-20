@@ -37,6 +37,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
+    - assets/styles/
 
 flutter_gen:
   output: lib/app/assets

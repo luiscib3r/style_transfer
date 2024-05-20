@@ -7,10 +7,14 @@ class EditorPage extends GoRoute {
       : super(
           path: _path,
           name: _name,
-          pageBuilder: (context, state) => const CupertinoPage(
-            name: _name,
-            child: EditorView(),
-          ),
+          pageBuilder: (context, state) {
+            context.read<FilterBloc>().loadFilters();
+
+            return const CupertinoPage(
+              name: _name,
+              child: EditorView(),
+            );
+          },
         );
 
   static const _path = 'editor';
