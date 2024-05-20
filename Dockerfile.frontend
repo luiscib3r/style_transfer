@@ -1,0 +1,22 @@
+FROM ghcr.io/cirruslabs/flutter:3.22.0 AS build
+
+WORKDIR /app
+
+COPY pubspec.yaml pubspec.lock ./
+
+RUN flutter pub get
+
+COPY . ./
+
+ARG BASE_URL=${BASE_URL}
+
+RUN flutter build web
+
+RUN ./build_web_workers.sh $BASE_URL
+
+RUN cp web/*_worker.* build/web/
+
+FROM nginx:1
+
+COPY --from=build /app/build/web/ /usr/share/nginx/html
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
