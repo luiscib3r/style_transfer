@@ -1,11 +1,13 @@
 // ignore_for_file: always_use_package_imports
 
 import 'dart:async';
+import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:equatable/equatable.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:style_transfer/app/app.dart';
+import 'package:style_transfer/app/bloc/styler/worker/styler_bloc_worker.dart';
 
 import 'gallery_saver/gallery_saver.dart'
     if (dart.library.html) 'gallery_saver/gallery_saver_web.dart';

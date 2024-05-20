@@ -170,7 +170,7 @@ class _CameraViewState extends State<CameraView> with WidgetsBindingObserver {
           children: [
             if (controller != null)
               Transform.scale(
-                scale: scale,
+                scale: kIsWeb ? 1 : scale,
                 child: Center(
                   child: CameraPreview(controller!),
                 ),

@@ -6,8 +6,8 @@ import 'package:image/image.dart';
 import 'package:style_transfer/app/data/data.dart';
 import 'package:tflite_flutter/tflite_flutter.dart';
 
-class StylerTfLiteDataSource extends StylerDataSource {
-  StylerTfLiteDataSource({
+class StylerDataSourceImpl extends StylerDataSource {
+  StylerDataSourceImpl({
     required ImageDataSource imageDataSource,
   }) : _imageDataSource = imageDataSource;
 
