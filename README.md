@@ -14,19 +14,17 @@ Style Transfer is an application developed with Flutter that allows users to app
 
 ## Screenshots
 
+### Mobile
+
+|  |  | | |
+| --- | --- | --- | --- |
+| ![Home](screenshots/mobile/1.jpeg) | ![Image](screenshots/mobile/2.jpeg) | ![Styled](screenshots/mobile/3.jpeg) | ![Styled](screenshots/mobile/4.jpeg) |
+
 ### Web
 |  |  |
 | --- | --- |
 | ![Home](screenshots/web/1.png) | ![Image](screenshots/web/2.png) | 
 ![Styled](screenshots/web/3.png) | ![Styled](screenshots/web/4.png) |
-
-### Mobile
-
-|  |  |
-| --- | --- |
-| ![Home](screenshots/mobile/1.png) | ![Image](screenshots/mobile/2.png) |
-| ![Styled](screenshots/mobile/3.png) | ![Styled](screenshots/mobile/4.png) |
-
 
 ## Local deployment using Docker Compose
 
