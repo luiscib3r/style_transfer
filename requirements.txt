@@ -3,7 +3,7 @@ absl-py==2.1.0; python_version >= '3.7'
 annotated-types==0.6.0; python_version >= '3.8'
 anyio==4.3.0; python_version >= '3.8'
 astunparse==1.6.3
-certifi==2024.2.2; python_version >= '3.6'
+certifi==2024.7.4; python_version >= '3.6'
 charset-normalizer==3.3.2; python_full_version >= '3.7.0'
 click==8.1.7; python_version >= '3.7'
 dnspython==2.6.1; python_version >= '3.8'
